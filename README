@@ -1,0 +1,5 @@
+This is Netbeans plugin which helps open files via gpicker 
+(http://github.com/alk/gpicker)
+
+It adds action "Pick file via gpicker" into section "Edit" and binds shortcut 
+(by default CTRL+SHIFT+G) which you can change at keymap settings.

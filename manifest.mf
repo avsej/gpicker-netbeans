@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.gpicker
+OpenIDE-Module-Layer: org/gpicker/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/gpicker/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
