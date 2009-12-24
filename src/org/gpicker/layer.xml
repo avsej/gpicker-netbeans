@@ -20,6 +20,18 @@
             </file>
         </folder>
     </folder>
+    <folder name="OptionsDialog">
+        <folder name="Advanced">
+            <file name="org-gpicker-settings-gpickerAdvancedOption.instance">
+                <attr name="controller" newvalue="org.gpicker.settings.GPickerOptionsPanelController"/>
+                <attr name="displayName" bundlevalue="org.gpicker.settings.Bundle#AdvancedOption_DisplayName_gpicker"/>
+                <attr name="instanceCreate" methodvalue="org.netbeans.spi.options.AdvancedOption.createSubCategory"/>
+                <attr name="keywords" bundlevalue="org.gpicker.settings.Bundle#AdvancedOption_Keywords_gpicker"/>
+                <attr name="keywordsCategory" stringvalue="Advanced/null"/>
+                <attr name="toolTip" bundlevalue="org.gpicker.settings.Bundle#AdvancedOption_Tooltip_gpicker"/>
+            </file>
+        </folder>
+    </folder>
     <folder name="Shortcuts">
         <file name="DS-G.shadow">
             <attr name="originalFile" stringvalue="Actions/Edit/org-gpicker-actions-GPickFile.instance"/>

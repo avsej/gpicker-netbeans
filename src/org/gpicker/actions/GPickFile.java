@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.prefs.Preferences;
 import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ui.OpenProjects;
@@ -27,12 +28,16 @@ import org.netbeans.spi.debugger.ui.EditorContextDispatcher;
 import org.openide.cookies.OpenCookie;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
+import org.openide.util.NbPreferences;
 
 public final class GPickFile implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
+            Preferences pref = NbPreferences.forModule(GPickFile.class);
+            String executable = pref.get("gpicker_executable", "gpicker");
+
             FileObject file = EditorContextDispatcher.getDefault().getCurrentFile();
             Project project;
             if (file != null) {
@@ -46,7 +51,7 @@ public final class GPickFile implements ActionListener {
             }
 
             if (project != null) {
-                Process p = Runtime.getRuntime().exec("gpicker -t guess " + project.getProjectDirectory().getPath());
+                Process p = Runtime.getRuntime().exec(executable + " -t guess " + project.getProjectDirectory().getPath());
 
                 BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
