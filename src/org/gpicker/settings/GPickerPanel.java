@@ -84,7 +84,7 @@ final class GPickerPanel extends javax.swing.JPanel {
 
     void load() {
         binFileTextField.setText(NbPreferences.forModule(GPickerPanel.class).get("gpicker_executable", "gpicker"));
-        pathTextField.setText(NbPreferences.forModule(GPickerPanel.class).get("gpicker_path", ""));
+        pathTextField.setText(NbPreferences.forModule(GPickerPanel.class).get("gpicker_path", System.getenv("PATH")));
     }
 
     void store() {
