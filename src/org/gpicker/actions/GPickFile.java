@@ -38,19 +38,9 @@ public final class GPickFile implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Preferences pref = NbPreferences.forModule(GPickFile.class);
-        String path = pref.get("gpicker_path", System.getenv("PATH"));
-        List<String> env = null;
-        if (path.trim().length() > 0) {
-            env = new ArrayList<String>();
-            for (Map.Entry<String, String> entry : System.getenv().entrySet()) {
-                String name = entry.getKey();
-                String value = entry.getValue();
-                if (name.compareTo("PATH") == 0) {
-                    value = path.trim();
-                }
-                env.add(name + "=" + value);
-            }
-        }
+        String system_path = System.getenv("PATH");
+        String path = pref.get("gpicker_path", "").trim();
+        path += ":" + system_path;
 
         try {
             FileObject file = EditorContextDispatcher.getDefault().getCurrentFile();
@@ -66,7 +56,9 @@ public final class GPickFile implements ActionListener {
             }
 
             if (project != null) {
-                Process p = Runtime.getRuntime().exec("gpicker -t guess " + project.getProjectDirectory().getPath(), env.toArray(new String[0]));
+                ProcessBuilder pb = new ProcessBuilder("gpicker -t guess " + project.getProjectDirectory().getPath());
+                pb.environment().put("PATH", path);
+                Process p = pb.start();
 
                 BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
@@ -86,13 +78,13 @@ public final class GPickFile implements ActionListener {
                     }
                 }
                 if ((s = stdError.readLine()) != null) {
-                    System.err.println("[gpicker] Error while execution gpicker: " + s + "\ntenv: " + env);
+                    System.err.println("[gpicker] Error while execution gpicker: " + s + "\n\tPATH: " + path);
                 }
             } else {
                 System.err.println("[gpicker] Project not found. Nothing to pick.");
             }
         } catch (IOException ex) {
-            System.out.println("[gpicker] Cannot execute gpicker: " + ex.getMessage() + "\n\tenv: " + env);
+            System.out.println("[gpicker] Cannot execute gpicker: " + ex.getMessage() + "\n\tPATH: " + path);
         }
     }
 }
