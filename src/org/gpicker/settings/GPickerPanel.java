@@ -39,12 +39,16 @@ final class GPickerPanel extends javax.swing.JPanel {
 
         binFileLabel = new javax.swing.JLabel();
         binFileTextField = new javax.swing.JTextField();
-
-        setBorder(null);
+        pathLabel = new javax.swing.JLabel();
+        pathTextField = new javax.swing.JTextField();
 
         org.openide.awt.Mnemonics.setLocalizedText(binFileLabel, org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.binFileLabel.text")); // NOI18N
 
         binFileTextField.setText(org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.binFileTextField.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(pathLabel, org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.pathLabel.text")); // NOI18N
+
+        pathTextField.setText(org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.pathTextField.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -52,9 +56,15 @@ final class GPickerPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(binFileLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(binFileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(binFileLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(binFileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(pathLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pathTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -64,16 +74,22 @@ final class GPickerPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(binFileTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(binFileLabel))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pathLabel))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     void load() {
         binFileTextField.setText(NbPreferences.forModule(GPickerPanel.class).get("gpicker_executable", "gpicker"));
+        pathTextField.setText(NbPreferences.forModule(GPickerPanel.class).get("gpicker_path", ""));
     }
 
     void store() {
         NbPreferences.forModule(GPickFile.class).put("gpicker_executable", binFileTextField.getText());
+        NbPreferences.forModule(GPickerPanel.class).put("gpicker_path", pathTextField.getText());
     }
 
     boolean valid() {
@@ -83,5 +99,7 @@ final class GPickerPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel binFileLabel;
     private javax.swing.JTextField binFileTextField;
+    private javax.swing.JLabel pathLabel;
+    private javax.swing.JTextField pathTextField;
     // End of variables declaration//GEN-END:variables
 }

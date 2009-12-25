@@ -34,10 +34,21 @@ public final class GPickFile implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            Preferences pref = NbPreferences.forModule(GPickFile.class);
-            String executable = pref.get("gpicker_executable", "gpicker");
+        Preferences pref = NbPreferences.forModule(GPickFile.class);
+        String executable = pref.get("gpicker_executable", "gpicker");
+        if (executable.trim().length() > 0) {
+            executable = executable.trim();
+        } else {
+            executable = "gpicker";
+        }
 
+        String path = pref.get("gpicker_path", System.getenv("PATH"));
+        String[] env = null;
+        if (path.trim().length() > 0) {
+            env = new String[]{"PATH=" + path.trim()};
+        }
+
+        try {
             FileObject file = EditorContextDispatcher.getDefault().getCurrentFile();
             Project project;
             if (file != null) {
@@ -51,7 +62,7 @@ public final class GPickFile implements ActionListener {
             }
 
             if (project != null) {
-                Process p = Runtime.getRuntime().exec(executable + " -t guess " + project.getProjectDirectory().getPath());
+                Process p = Runtime.getRuntime().exec(executable + " -t guess " + project.getProjectDirectory().getPath(), env);
 
                 BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
@@ -77,7 +88,7 @@ public final class GPickFile implements ActionListener {
                 System.err.println("[gpicker] Project not found. Nothing to pick.");
             }
         } catch (IOException ex) {
-            System.out.println("[gpicker] Cannot execute gpicker: " + ex.getMessage());
+            System.out.println("[gpicker] Cannot execute gpicker: " + ex.getMessage() + "\tenv: " + env);
         }
     }
 }
