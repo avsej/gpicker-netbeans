@@ -36,28 +36,71 @@ final class GPickerPanel extends javax.swing.JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        pathLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         pathTextField = new javax.swing.JTextField();
+        pathLabel = new javax.swing.JLabel();
+        executableLabel = new javax.swing.JLabel();
+        executableTextField = new javax.swing.JTextField();
 
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+        setMinimumSize(new java.awt.Dimension(40, 20));
+        setPreferredSize(new java.awt.Dimension(40, 20));
+        setLayout(new java.awt.GridBagLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(pathLabel, org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.pathLabel.text")); // NOI18N
-        add(pathLabel);
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         pathTextField.setText(org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.pathTextField.text")); // NOI18N
-        pathTextField.setMaximumSize(new java.awt.Dimension(300, 20));
+        pathTextField.setMaximumSize(new java.awt.Dimension(20000, 20));
         pathTextField.setMinimumSize(new java.awt.Dimension(200, 20));
-        pathTextField.setPreferredSize(new java.awt.Dimension(200, 20));
-        add(pathTextField);
+        pathTextField.setPreferredSize(new java.awt.Dimension(300, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(pathTextField, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(pathLabel, org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.pathLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(pathLabel, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(executableLabel, org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.executableLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(executableLabel, gridBagConstraints);
+
+        executableTextField.setText(org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.executableTextField.text")); // NOI18N
+        executableTextField.setMaximumSize(new java.awt.Dimension(20000, 20));
+        executableTextField.setMinimumSize(new java.awt.Dimension(200, 20));
+        executableTextField.setPreferredSize(new java.awt.Dimension(300, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(executableTextField, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        add(jPanel1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     void load() {
         pathTextField.setText(NbPreferences.forModule(GPickFile.class).get("gpicker_path", System.getenv("PATH")));
+        executableTextField.setText(NbPreferences.forModule(GPickFile.class).get("gpicker_executable", "gpicker"));
     }
 
     void store() {
         NbPreferences.forModule(GPickFile.class).put("gpicker_path", pathTextField.getText());
+        NbPreferences.forModule(GPickFile.class).put("gpicker_executable", executableTextField.getText());
     }
 
     boolean valid() {
@@ -65,6 +108,9 @@ final class GPickerPanel extends javax.swing.JPanel {
         return true;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel executableLabel;
+    private javax.swing.JTextField executableTextField;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel pathLabel;
     private javax.swing.JTextField pathTextField;
     // End of variables declaration//GEN-END:variables
