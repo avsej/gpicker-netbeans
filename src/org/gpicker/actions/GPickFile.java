@@ -63,15 +63,21 @@ public final class GPickFile implements ActionListener {
                         OpenCookie open = DataObject.find(file).getCookie(OpenCookie.class);
                         if (open != null) {
                             open.open();
+                        } else {
+                            System.err.println("[gpicker] Netbeans cannot open file: " + s);
                         }
+                    } else {
+                        System.err.println("[gpicker] Cannot find file: " + s);
                     }
                 }
                 if ((s = stdError.readLine()) != null) {
-                    System.err.println(s);
+                    System.err.println("[gpicker] Error while execution gpicker: " + s);
                 }
+            } else {
+                System.err.println("[gpicker] Project not found. Nothing to pick.");
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("[gpicker] Cannot execute gpicker: " + ex.getMessage());
         }
     }
 }
