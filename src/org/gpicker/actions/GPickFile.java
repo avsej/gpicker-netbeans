@@ -38,13 +38,6 @@ public final class GPickFile implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Preferences pref = NbPreferences.forModule(GPickFile.class);
-        String executable = pref.get("gpicker_executable", "gpicker");
-        if (executable.trim().length() > 0) {
-            executable = executable.trim();
-        } else {
-            executable = "gpicker";
-        }
-
         String path = pref.get("gpicker_path", System.getenv("PATH"));
         List<String> env = null;
         if (path.trim().length() > 0) {
@@ -73,7 +66,7 @@ public final class GPickFile implements ActionListener {
             }
 
             if (project != null) {
-                Process p = Runtime.getRuntime().exec(executable + " -t guess " + project.getProjectDirectory().getPath(), env.toArray(new String[0]));
+                Process p = Runtime.getRuntime().exec("gpicker -t guess " + project.getProjectDirectory().getPath(), env.toArray(new String[0]));
 
                 BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
