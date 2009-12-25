@@ -40,30 +40,16 @@ final class GPickerPanel extends javax.swing.JPanel {
         pathLabel = new javax.swing.JLabel();
         pathTextField = new javax.swing.JTextField();
 
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+
         org.openide.awt.Mnemonics.setLocalizedText(pathLabel, org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.pathLabel.text")); // NOI18N
+        add(pathLabel);
 
         pathTextField.setText(org.openide.util.NbBundle.getMessage(GPickerPanel.class, "GPickerPanel.pathTextField.text")); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pathLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pathTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pathLabel)
-                    .addComponent(pathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(156, Short.MAX_VALUE))
-        );
+        pathTextField.setMaximumSize(new java.awt.Dimension(300, 20));
+        pathTextField.setMinimumSize(new java.awt.Dimension(200, 20));
+        pathTextField.setPreferredSize(new java.awt.Dimension(200, 20));
+        add(pathTextField);
     }// </editor-fold>//GEN-END:initComponents
 
     void load() {
