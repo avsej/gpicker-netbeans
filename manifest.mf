@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 OpenIDE-Module: org.gpicker/0
 OpenIDE-Module-Layer: org/gpicker/layer.xml
 OpenIDE-Module-Localizing-Bundle: org/gpicker/Bundle.properties
-OpenIDE-Module-Specification-Version: 0.5
+OpenIDE-Module-Specification-Version: 0.6
 
